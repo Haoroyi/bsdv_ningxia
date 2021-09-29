@@ -48,12 +48,17 @@ export default {
     .middle,
     .right {
       box-sizing: border-box;
-      width: 1100px;
+      // width: 1100px;
       height: 100%;
     }
-    .left {
+    .left, .right {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+    }
+    .middle {
+      display: flex;
+      flex-direction: row;
       justify-content: space-between;
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <container :size="{ width: 3480, height: 1080 }">
+    <container :size="{ width: 3840, height: 1080 }">
       <template v-slot:left>
         <!-- 使用情况 --- start --- -->
         <wrapper :size="{ width: 1100, height: 307 }">
@@ -129,8 +129,122 @@
         </wrapper>
         <!-- 荣誉榜 --- end --- -->
       </template>
-      <template v-slot:middle>456789</template>
-      <template v-slot:right>123</template>
+      <template v-slot:middle>
+        <div class="mid-left">
+          <div class="mid-left-top">
+            <!-- 荣誉榜 --- start --- -->
+            <wrapper :size="{width: 388,height: 480}">
+              <template v-slot:title>
+                <i class="title-icon"></i>
+                <span class="title-text">基础信息</span>
+              </template>
+            </wrapper>
+            <!-- 荣誉榜 --- end --- -->
+          </div>
+          <div class="mid-left-bottom">
+            <wrapper :size="{width: 388,height: 480}">
+              <!-- 基础工作 --- start --- -->
+              <template v-slot:title>
+                <i class="title-icon"></i>
+                <span class="title-text">基础工作</span>
+              </template>
+            </wrapper>
+            <!-- 基础工作 --- end --- -->
+          </div>
+        </div>
+        <div class="mid-center">
+          <!-- 支部生活 --- stat --- -->
+          <wrapper :size="{width: 670,height: 980}">
+            <template v-slot:title>
+              <i class="title-icon"></i>
+              <span class="title-text">支部生活</span>
+            </template>
+            <template v-slot:content>
+              <div class="zhibushenghuo">
+                <div class="zhibushenghuo-map">
+                  <Map />
+                </div>
+                <div class="zhibushenghuo-detail">
+                  <wrapper :size="{height: 87}">
+                    <template v-slot:content>
+                      123
+                    </template>
+                  </wrapper>
+                </div>
+              </div>
+            </template>
+          </wrapper>
+          <!-- 支部生活 --- end --- -->
+        </div>
+        <div class="mid-right">
+          <!-- 党建和创 --- stat --- -->
+          <div class="mid-left-top">
+            <wrapper :size="{width: 388,height: 480}">
+              <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">党建和创</span>
+          </template>
+            </wrapper>
+          </div>
+          <!-- 党建和创 --- end --- -->
+          <!-- 合格行动 --- start --- -->
+          <div class="mid-left-bottom">
+            <wrapper :size="{width: 388,height: 480}">
+              <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">合格行动</span>
+          </template>
+            </wrapper>
+          </div>
+          <!-- 合格行动 --- end --- -->
+        </div>
+      </template>
+      <template v-slot:right>
+        <!-- 党史学习 --- start --- -->
+        <wrapper :size="{width: 1100,height: 310}">
+          <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">党史学习</span>
+          </template>
+        </wrapper>
+        <!-- 党史学习 --- end --- -->
+        <div class="right-center">
+          <!-- 党建专题活动 --- start --- -->
+          <wrapper :size="{width: 537,height: 313}">
+            <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">党建专题活动</span>
+          </template>
+          </wrapper>
+          <!-- 党建专题活动 --- end --- -->
+          <!-- 推荐课程 --- start --- -->
+          <wrapper :size="{width: 537,height: 313}">
+            <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">推荐课程</span>
+          </template>
+          </wrapper>
+          <!-- 推荐课程 --- end --- -->
+        </div>
+        <div class="right-bottom">
+          <!-- 党支部品牌创建 --- start --- -->
+          <wrapper :size="{width: 755,height: 325}">
+            <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">党支部品牌创建</span>
+          </template>
+          </wrapper>
+          <!-- 党支部品牌创建 --- end --- -->
+          <!-- 党建功能模块列表 --- start --- -->
+          <wrapper :size="{width: 320,height: 325}">
+            <template v-slot:title>
+            <i class="title-icon"></i>
+            <span class="title-text">党建功能模块列表</span>
+          </template>
+          </wrapper>
+          <!-- 党建功能模块列表 --- end --- -->
+        </div>
+      </template>
     </container>
   </div>
 </template>
@@ -140,8 +254,9 @@
 import Container from '../components/Container.vue'
 import Wrapper from '../components/Wrapper.vue'
 import Box from '../components/Box.vue'
+import Map from '../components/Map.vue'
 export default {
-  components: { Container, Wrapper, Box },
+  components: { Container, Wrapper, Box, Map },
   name: 'Home',
   data () {
     return {}
@@ -149,12 +264,32 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.shiyongqingkuang, .rongyubang-top, .rongyubang-bottom {
+.shiyongqingkuang, .rongyubang-top, .rongyubang-bottom, .right-center, .right-bottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 .rongyubang-top {
   margin-bottom: 17px;
+}
+.mid-left, .mid-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mid-center {
+  margin: 0 20px;
+}
+.zhibushenghuo {
+  display: flex;
+  flex-direction: column;
+  height: 900px;
+  .zhibushenghuo-map {
+    flex: 1
+  }
+  .zhibushenghuo-details {
+    flex: 0 0 87px;
+    height: 87px;
+  }
 }
 </style>
