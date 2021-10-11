@@ -1,20 +1,13 @@
 <template>
   <div class="function-condition">
     <ul class="menu">
-      <li :class="{ active: type === 'today' }" @click="menuChange('today')">
-        当日
-      </li>
       <li
-        :class="{ active: type === 'currentMonth' }"
-        @click="menuChange('currentMonth')"
-      >
-        当月
-      </li>
-      <li
-        :class="{ active: type === 'currentYear' }"
-        @click="menuChange('currentYear')"
-      >
-        本年度
+        v-for="(menu, index) in menus"
+        :key="index"
+        @mouseenter="menuChange(index)"
+        @mouseleave="autoSelect()"
+        :class="{ active: menu.type === currentType }">
+        {{menu.label}}
       </li>
     </ul>
     <div class="functions-table">
@@ -55,20 +48,37 @@ export default {
   },
   data() {
     return {
-      type: 'today'
+      menus: [
+        { type: 'today', label: '当日' },
+        { type: 'currentMonth', label: '当月' },
+        { type: 'currentYear', label: '本年度' }
+      ],
+      timer: null,
+      currentIndex: 0
     }
   },
   methods: {
-    menuChange(type) {
-      this.type = type
+    menuChange(index) {
+      this.currentIndex = index
+      clearInterval(this.timer)
+    },
+    autoSelect() {
+      this.timer = setInterval(() => {
+        this.currentIndex++
+        if (this.currentIndex > 2) this.currentIndex = 0
+      }, 2000)
     }
   },
   computed: {
+    currentType() {
+      return this.menus[this.currentIndex].type
+    },
     trlist() {
-      return this.data[this.type]
+      return this.data[this.currentType]
     }
   },
   mounted() {
+    this.autoSelect()
   }
 }
 </script>
