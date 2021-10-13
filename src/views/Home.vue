@@ -26,7 +26,9 @@
                   <span>功能使用</span>
                 </template>
                 <template v-slot:content>
-                  <function-condition :data="functionConditionData"></function-condition>
+                  <function-condition
+                    :data="functionConditionData"
+                  ></function-condition>
                 </template>
               </box>
               <!-- 功能使用 --- start --- -->
@@ -53,32 +55,32 @@
           <template v-slot:content>
             <div class="rongyubang-top">
               <!-- 先进基层党组织 --- start --- -->
-              <box :size="{ width: 341, height: 237 }">
+              <box :size="{ width: 341, height: 260 }">
                 <template v-slot:title>
                   <span>先进基层党组织</span>
                 </template>
                 <template v-slot:content>
-                  <span>先进基层党组织</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '280px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 先进基层党组织 --- end --- -->
               <!-- 优秀共产党员 --- start --- -->
-              <box :size="{ width: 341, height: 237 }">
+              <box :size="{ width: 341, height: 260 }">
                 <template v-slot:title>
                   <span>优秀共产党员</span>
                 </template>
                 <template v-slot:content>
-                  <span>优秀共产党员</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '317px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 优秀共产党员 --- end --- -->
               <!-- 优秀党务工作者 --- start --- -->
-              <box :size="{ width: 341, height: 237 }">
+              <box :size="{ width: 341, height: 260 }">
                 <template v-slot:title>
                   <span>优秀党务工作者</span>
                 </template>
                 <template v-slot:content>
-                  <span>优秀党务工作者</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '317px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 优秀党务工作者 --- end --- -->
@@ -90,7 +92,7 @@
                   <span>发展先锋</span>
                 </template>
                 <template v-slot:content>
-                  <span>发展先锋</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '230px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 发展先锋 --- end --- -->
@@ -100,7 +102,7 @@
                   <span>党员先锋</span>
                 </template>
                 <template v-slot:content>
-                  <span>党员先锋</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '230px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 党员先锋 --- end --- -->
@@ -110,7 +112,7 @@
                   <span>奋斗先锋</span>
                 </template>
                 <template v-slot:content>
-                  <span>奋斗先锋</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '230px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 奋斗先锋 --- end --- -->
@@ -120,7 +122,7 @@
                   <span>青年先锋</span>
                 </template>
                 <template v-slot:content>
-                  <span>青年先锋</span>
+                  <ryb-slider :data="ryb_xianjindzb" :size="{width: '230px', height: '205px'}"></ryb-slider>
                 </template>
               </box>
               <!-- 青年先锋 --- end --- -->
@@ -257,6 +259,7 @@ import LoginCondition from '../components/LoginCondition.vue'
 import FunctionCondition from '../components/FunctionCondition.vue'
 import StudyHotwords from '../components/StudyHotwords.vue'
 import Map from '../components/Map.vue'
+import RybSlider from '../components/RybSlider.vue'
 export default {
   components: {
     Container,
@@ -265,19 +268,24 @@ export default {
     LoginCondition,
     FunctionCondition,
     StudyHotwords,
-    Map
+    Map,
+    RybSlider
   },
   name: 'Home',
   data() {
     return {
-      functionConditionData: {} // 功能似乎用的数据
+      functionConditionData: {}, // 数据】功能使用的数据
+      ryb_xianjindzb: [] // 【数据】荣誉榜：先进基层党支部
     }
   },
   methods: {
     getData() {
       axios.get('/data/current.json').then((response) => {
         this.functionConditionData = response.data.data
-        console.log(this.functionConditionData)
+      })
+      axios.get('/data/xianjinjicengdangzuzhi.json').then((response) => {
+        this.ryb_xianjindzb = response.data.data
+        console.log(this.ryb_xianjindzb)
       })
     }
   },

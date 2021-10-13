@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './assets/styles/main.less'
-Vue.config.productionTip = false
 
+import EasySlider from 'vue-easy-slider'
+Vue.config.productionTip = false
+Vue.use(EasySlider)
 new Vue({
   router,
   store,
